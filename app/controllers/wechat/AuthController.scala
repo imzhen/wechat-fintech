@@ -29,7 +29,7 @@ class AuthController @Inject()(wechatClient: WechatClient) extends Controller {
       result <- wechatClient.getResponse(message)
 //      encryptedResult <- wechatClient.encryptMsg(result)
     } yield {
-      Ok(result).as("application/xml")
+      Ok(result).as("application/xml;charset=UTF-8")
     }
 
   }
