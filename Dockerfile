@@ -1,4 +1,4 @@
-# Copied From http://tanin.nanakorn.com/blogs/345
+# Copied From http://tanin.nanakorn.com/blogs/345her
 
 FROM gcr.io/google_appengine/openjdk
 COPY ./target/universal/wechatfintech-1.0-SNAPSHOT.tgz /wechatfintech-1.0-SNAPSHOT.tgz
@@ -7,4 +7,4 @@ RUN tar -xvf wechatfintech-1.0-SNAPSHOT.tgz
 WORKDIR /wechatfintech-1.0-SNAPSHOT
 RUN chmod 755 /docker-entrypoint.bash
 ENTRYPOINT ["/docker-entrypoint.bash"]
-CMD ["bin/wechatfintech", "-Dconfig.file=conf/prod.conf",  "-Dplay.crypto.secret=somesecret", "-Dhttp.port=8080"]
+CMD ["bin/wechatfintech", "-Dconfig.file=conf/prod.conf", "-Dplay.crypto.secret=somesecret", "-Dhttp.port=8080"]
