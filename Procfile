@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/wechatfintech -Dhttp.port = ${port} -Dplay.crypto.secret = "fdsafsa32ifewkmdfsa"
+web: target/universal/temp/bin/wechatfintech -Dhttp.port = ${port} -Dplay.crypto.secret = "fdsafsa32ifewkmdfsa"
