@@ -11,6 +11,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 /**
   * Created by Elliott on 4/6/17.
   */
+
 @Singleton
 class AuthController @Inject()(wechatClient: WechatClient) extends Controller {
 
@@ -22,7 +23,7 @@ class AuthController @Inject()(wechatClient: WechatClient) extends Controller {
   }
 
 
-  def post = Action.async(parse.tolerantText) { request =>
+  def post = Action.async(parse.tolerantXml) { request =>
 
     for {
       message <- wechatClient.decryptMsg(request.body, request)

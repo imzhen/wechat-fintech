@@ -4,7 +4,7 @@ package services.message
   * Created by Elliott on 4/7/17.
   */
 
-import scala.xml.{Node, XML}
+import scala.xml.{Node, NodeSeq}
 
 abstract class Message(node: Node) {
   var toUserName = XMLHelper.text(node, "ToUserName")
@@ -44,7 +44,7 @@ case class WechatMessage(node: Node) extends Message(node) {
   def url = XMLHelper.text(node, "Url")
 
 
-  def getContent = msgType
+  def getContent = content
 
   import MessageType._
 
@@ -61,5 +61,7 @@ case class WechatMessage(node: Node) extends Message(node) {
 }
 
 object WechatMessage {
-  def apply(s: String): WechatMessage = new WechatMessage(XML.loadString(s))
+  def apply(s: NodeSeq): WechatMessage = {
+    new WechatMessage(s.head)
+  }
 }

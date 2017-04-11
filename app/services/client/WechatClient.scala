@@ -16,6 +16,7 @@ import services.utils.Utilities
 
 import scala.concurrent.Future
 import scala.concurrent.duration._
+import scala.xml.NodeSeq
 
 /**
   * Created by Elliott on 4/7/17.
@@ -38,7 +39,7 @@ class WechatClient @Inject()(system: ActorSystem) extends Crypto with WechatSett
 
 trait Crypto extends WechatSettings {
 
-  def decryptMsg(msg: String, request: RequestHeader): Future[Message] = {
+  def decryptMsg(msg: NodeSeq, request: RequestHeader): Future[WechatMessage] = {
 
     val timestamp = request.getQueryString("timestamp").getOrElse("empty")
     val nonce = request.getQueryString("nonce").getOrElse("empty")
@@ -51,11 +52,11 @@ trait Crypto extends WechatSettings {
     }
   }
 
-  def decryptAESMsg(signature: String, timestamp: String, nonce: String, msg: String): Future[Message] = {
+  def decryptAESMsg(signature: String, timestamp: String, nonce: String, msg: NodeSeq): Future[WechatMessage] = {
     decryptPlainMsg(msg)
   }
 
-  def decryptPlainMsg(msg: String): Future[Message] = Future(WechatMessage(msg))
+  def decryptPlainMsg(msg: NodeSeq): Future[WechatMessage] = Future(WechatMessage(msg))
 
   def encryptMsg(msg: String): Future[String] = {
     val wx = new WXBizMsgCrypt(token, encodingAESKey, appId)
